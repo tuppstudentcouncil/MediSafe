@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MediSafe App Support</title>
+  <meta name="description" content="ศูนย์ช่วยเหลือ MediSafe — คู่มือการใช้งาน คำถามที่พบบ่อย วิธีแก้ปัญหาเบื้องต้น ในหน้าเดียว" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-50:#eff6ff;--blue-100:#dbeafe;--blue-200:#bfdbfe;--blue-300:#93c5fd;--blue-400:#60a5fa;--blue-500:#3b82f6;--blue-600:#2563eb;--blue-700:#1d4ed8;--blue-800:#1e40af;--blue-900:#1e3a8a;
+      --ink:#0f172a;--muted:#475569;--bg:#f8fafc;--card:#ffffff;--ring:#93c5fd;
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:"Sarabun","Noto Sans Thai",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";color:var(--ink);background:linear-gradient(180deg,var(--blue-50),#fff)}
+    img{max-width:100%;display:block}
+    a{color:var(--blue-700);text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Header */
+    .topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.8);backdrop-filter:saturate(160%) blur(10px);border-bottom:1px solid var(--blue-100)}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .row{display:flex;align-items:center;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px;padding:10px 0}
+    .brand img{width:40px;height:40px;border-radius:10px;object-fit:cover;border:2px solid var(--blue-200)}
+    .brand h1{font-size:18px;line-height:1.1;margin:0;font-weight:700;color:var(--blue-800)}
+    .nav{margin-left:auto;display:flex;gap:14px;flex-wrap:wrap}
+    .nav a{padding:8px 12px;border-radius:10px;font-weight:600}
+    .nav a:hover{background:var(--blue-100)}
+
+    /* Hero */
+    .hero{padding:28px 0 12px}
+    .hero-card{display:grid;grid-template-columns:1.1fr .9fr;gap:22px;align-items:center;background:linear-gradient(135deg,var(--blue-100),#fff);border:1px solid var(--blue-200);border-radius:var(--radius);padding:22px;box-shadow:0 8px 30px rgba(30,64,175,.08)}
+    .hero h2{margin:0 0 6px;font-size:28px;color:var(--blue-900)}
+    .hero p{margin:0 0 16px;color:var(--muted)}
+    .actions{display:flex;flex-wrap:wrap;gap:10px}
+    .btn{appearance:none;border:0;border-radius:14px;padding:12px 16px;font-weight:700;cursor:pointer}
+    .btn-primary{background:var(--blue-600);color:#fff}
+    .btn-primary:hover{background:var(--blue-700)}
+    .btn-ghost{background:#fff;border:1px solid var(--blue-200);color:var(--blue-700)}
+    .btn-ghost:hover{background:var(--blue-100)}
+
+    /* Search */
+    .searchbar{margin:18px 0 8px;display:flex;gap:10px}
+    .searchbar input{flex:1;padding:12px 14px;border-radius:12px;border:1px solid var(--blue-200);outline:none}
+    .searchbar input:focus{border-color:var(--ring);box-shadow:0 0 0 3px rgba(147,197,253,.5)}
+
+    /* Grid cards */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:900px){.hero-card{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:600px){.grid{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--blue-100);border-radius:var(--radius);padding:16px;box-shadow:0 4px 16px rgba(2,6,23,.05)}
+    .card h3{margin:0 0 8px;font-size:18px;color:var(--blue-800)}
+    .card p{margin:0;color:var(--muted)}
+
+    /* Details (accordion) */
+    details{border:1px solid var(--blue-100);border-radius:14px;padding:12px;background:#fff}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:700;color:var(--blue-800);display:flex;align-items:center;gap:8px}
+    summary::-webkit-details-marker{display:none}
+    .chev{transition:transform .2s ease}
+    details[open] .chev{transform:rotate(90deg)}
+
+    /* Footer */
+    footer{margin:28px 0 20px;text-align:center;color:#334155}
+    .tiny{font-size:12px;color:#64748b}
+
+    /* Utilities */
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:20px;background:var(--blue-100);border:1px solid var(--blue-200);font-weight:700;color:var(--blue-800)}
+    .section{margin:20px 0}
+    .hidden{display:none !important}
+    /* Announcement ticker */
+.announce{position:sticky;top:56px;z-index:40;background:linear-gradient(90deg,var(--blue-600),var(--blue-700));color:#fff;border-bottom:1px solid var(--blue-200)}
+.announce .track{white-space:nowrap;overflow:hidden}
+.announce .msg{display:inline-block;padding:8px 0;animation:scroll-x 18s linear infinite}
+@keyframes scroll-x{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+
+/* Animations & polish */
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.hero-card{animation:fadeUp .6s ease both}
+.card{transition:transform .18s ease, box-shadow .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(2,6,23,.10)}
+.btn{transition:transform .08s ease, box-shadow .15s ease}
+.btn:hover{box-shadow:0 6px 16px rgba(37,99,235,.25)}
+.btn:active{transform:translateY(1px)}
+details>div{animation:fadeUp .25s ease}
+
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container row">
+      <a class="brand" href="#top" aria-label="กลับสู่ด้านบน">
+        <img src="medisafelogo.png" alt="โลโก้ MediSafe" />
+        <h1>MediSafe App Support</h1>
+      </a>
+      <nav class="nav" aria-label="เมนูหลัก">
+        <a href="#start">เริ่มต้น</a>
+        <a href="#features">ฟีเจอร์</a>
+        <a href="#trouble">แก้ปัญหา</a>
+        <a href="#faq">คำถามพบบ่อย</a>
+        <a href="#contact">ติดต่อ</a>
+      </nav>
+    </div>
+  </header>
+  
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-card">
+        <div>
+          <div class="pill" title="บริการผู้ใช้"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" stroke="#1d4ed8" stroke-width="2"/></svg> ศูนย์ช่วยเหลือ</div>
+          <h2>ยินดีต้อนรับสู่ศูนย์ช่วยเหลือ <span style="white-space:nowrap">MediSafe</span></h2>
+          <p>เรียนรู้การใช้งานแอป ทีละขั้นตอน ตั้งค่าการเตือนยา ดูประวัติสุขภาพ และแก้ปัญหาที่เจอบ่อย—all in one page.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#start">เริ่มใช้งานทันที</a>
+            <a class="btn btn-ghost" href="#faq">ดูคำถามพบบ่อย</a>
+          </div>
+          <div class="searchbar" role="search">
+            <input id="search" type="search" placeholder="พิมพ์เพื่อค้นหา: ตัวอย่างเช่น \"เพิ่มการเตือนยา\" หรือ \"ลืมรหัสผ่าน\"" aria-label="ค้นหาคู่มือ" />
+          </div>
+        </div>
+        <div>
+          <img src="medisafelogo.png" alt="โลโก้ MediSafe ขนาดใหญ่" style="width:100%;max-width:360px;margin:0 auto;border-radius:18px;border:1px solid var(--blue-200);box-shadow:0 8px 24px rgba(2,6,23,.08)"/>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick start / cards -->
+    <section class="section" id="start">
+      <h2 style="color:var(--blue-900);margin:0 0 10px">เริ่มต้นใช้งาน</h2>
+      <div class="grid" id="guides">
+        <article class="card guide" data-search="ติดตั้ง ลงชื่อเข้าใช้ สมัครบัญชี สร้างบัญชี เริ่มต้น">
+          <h3>ติดตั้งและลงชื่อเข้าใช้</h3>
+          <p>ดาวน์โหลด ติดตั้ง และสร้างบัญชีใหม่ พร้อมยืนยันอีเมล/เบอร์โทรภายในไม่กี่นาที</p>
+          <ol>
+            <li>เปิด App Store / Google Play แล้วค้นหา “MediSafe”</li>
+            <li>ติดตั้งและเปิดแอป → เลือก <b>สร้างบัญชี</b></li>
+            <li>ยืนยันตัวตนตามขั้นตอน จากนั้นลงชื่อเข้าใช้</li>
+          </ol>
+        </article>
+        <article class="card guide" data-search="เพิ่มยา แจ้งเตือนยา ตั้งเวลา เตือนซ้ำ ปริมาณยา">
+          <h3>เพิ่มยาและตั้งเตือน</h3>
+          <p>เพิ่มรายการยา เลือกชนิด/โดส ตั้งเวลาการเตือน และความถี่</p>
+          <ol>
+            <li>ไปที่เมนู <b>ยา</b> → <b>เพิ่มยา</b></li>
+            <li>เลือกชนิดยา ป้อนปริมาณ และตั้งเวลาการเตือน</li>
+            <li>บันทึกและทดสอบการแจ้งเตือน</li>
+          </ol>
+        </article>
+        <article class="card guide" data-search="โปรไฟล์ สุขภาพ ประวัติ กรอกข้อมูล โรคประจำตัว">
+          <h3>ตั้งค่าโปรไฟล์สุขภาพ</h3>
+          <p>กรอกข้อมูลส่วนตัว โรคประจำตัว และเบอร์ติดต่อฉุกเฉิน เพื่อการดูแลที่แม่นยำ</p>
+          <ul>
+            <li>ชื่อ–สกุล วันเกิด น้ำหนัก ส่วนสูง</li>
+            <li>อาการแพ้ยา/อาหาร โรคประจำตัว</li>
+            <li>เบอร์ฉุกเฉิน เช่น 1669, 1646</li>
+          </ul>
+        </article>
+        <article class="card guide" data-search="สำรองข้อมูล กู้คืน โอนย้ายเครื่อง เปลี่ยนมือถือ backup restore">
+          <h3>สำรอง/กู้คืนข้อมูล</h3>
+          <p>เชื่อมบัญชีเพื่อสำรองข้อมูล และกู้คืนเมื่อย้ายเครื่อง</p>
+          <ul>
+            <li>เปิดสำรองอัตโนมัติในการตั้งค่า</li>
+            <li>กู้คืนเมื่อเข้าสู่ระบบบนเครื่องใหม่</li>
+          </ul>
+        </article>
+        <article class="card guide" data-search="แจ้งเตือน เงียบ ไม่ดัง ไม่เด้ง ปัญหาการแจ้งเตือน">
+          <h3>แจ้งเตือนไม่ดัง/ไม่เด้ง</h3>
+          <p>เช็คสิทธิ์การแจ้งเตือน โหมดประหยัดพลังงาน และการปิดกั้นเบื้องหลัง</p>
+          <ul>
+            <li>เปิดอนุญาตการแจ้งเตือนในระบบ</li>
+            <li>ยกเว้นจากโหมดประหยัดพลังงาน</li>
+            <li>อนุญาตทำงานเบื้องหลัง</li>
+          </ul>
+        </article>
+        <article class="card guide" data-search="สิทธิ์การใช้งาน เงื่อนไข ความเป็นส่วนตัว นโยบาย privacy terms">
+          <h3>นโยบายและเงื่อนไข</h3>
+          <p>อ่านนโยบายความเป็นส่วนตัว และเงื่อนไขการใช้งานของเรา</p>
+          <p><a href="#">อ่านเอกสารนโยบาย</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section" id="features">
+      <h2 style="color:var(--blue-900);margin:0 0 10px">ฟีเจอร์เด่น</h2>
+      <details class="feature" data-search="เตือนยา แจ้งเตือน การกินยา ทานยา">
+        <summary><span class="chev">▶</span> ระบบเตือนการทานยาอัจฉริยะ</summary>
+        <div style="margin-top:10px;color:var(--muted)">กำหนดช่วงเวลา ความถี่ และปริมาณ พร้อมตัวเลือกเลื่อนเตือน แจ้งซ้ำ และบันทึกประวัติการทาน</div>
+      </details>
+      <details class="feature" data-search="โปรไฟล์ฉุกเฉิน บัตรฉุกเฉิน Medical ID QR">
+        <summary><span class="chev">▶</span> โปรไฟล์ฉุกเฉิน (Medical ID)</summary>
+        <div style="margin-top:10px;color:var(--muted)">บันทึกข้อมูลสำคัญและ QR สำหรับให้บุคลากรแพทย์สแกนเข้าถึงข้อมูลสำคัญได้รวดเร็ว</div>
+      </details>
+      <details class="feature" data-search="สถิติ รายงาน รายสัปดาห์ กราฟ">
+        <summary><span class="chev">▶</span> สถิติและรายงานสุขภาพ</summary>
+        <div style="margin-top:10px;color:var(--muted)">ดูกราฟสรุปการทานยา การพลาดเตือน และแนวโน้มรายสัปดาห์/รายเดือน</div>
+      </details>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section class="section" id="trouble">
+      <h2 style="color:var(--blue-900);margin:0 0 10px">แก้ปัญหาเบื้องต้น</h2>
+      <details class="tip" data-search="ลืมรหัสผ่าน เข้าสู่ระบบไม่ได้ reset password">
+        <summary><span class="chev">▶</span> ลืมรหัสผ่าน</summary>
+        <div style="margin-top:10px;color:var(--muted)">
+          แตะ <b>ลืมรหัสผ่าน</b> บนหน้าเข้าสู่ระบบ → กรอกอีเมล/เบอร์โทร → ตรวจสอบกล่องจดหมายหรือตัวเลข OTP เพื่อรีเซ็ต
+        </div>
+      </details>
+      <details class="tip" data-search="แจ้งเตือน Android ปิดแบต โหมดประหยัด พื้นหลัง ฆ่าแอป">
+        <summary><span class="chev">▶</span> Android: แจ้งเตือนไม่ทำงาน</summary>
+        <div style="margin-top:10px;color:var(--muted)">
+          ไปที่การตั้งค่าระบบ → แบตเตอรี่ → ยกเว้นการประหยัดพลังงานให้แอป → อนุญาตทำงานเบื้องหลัง และเปิดสิทธิ์การแจ้งเตือน
+        </div>
+      </details>
+      <details class="tip" data-search="iOS Focus โหมดเงียบ iPhone การอนุญาต">
+        <summary><span class="chev">▶</span> iOS: แจ้งเตือนไม่ดัง</summary>
+        <div style="margin-top:10px;color:var(--muted)">
+          ตรวจสอบโหมดโฟกัส/ห้ามรบกวน และการอนุญาตการแจ้งเตือนใน Settings → Notifications → เลือก MediSafe และเปิด Allow Notifications
+        </div>
+      </details>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <h2 style="color:var(--blue-900);margin:0 0 10px">คำถามที่พบบ่อย</h2>
+      <details class="faq" data-search="ย้ายเครื่อง โอนข้อมูล เปลี่ยนโทรศัพท์">
+        <summary><span class="chev">▶</span> ย้ายเครื่องทำอย่างไร?</summary>
+        <div style="margin-top:10px;color:var(--muted)">ไม่ต้องกังวลเพราะเรา <b>ไม่เก็บข้อมูลของผู้ใช้</b> ข้อมูลส่วนตัวของคุณจะยังคงเป็นของคุณครับ</div>
+      </details>
+      <details class="faq" data-search="ข้อมูลส่วนตัว ความเป็นส่วนตัว เก็บข้อมูล นโยบาย">
+        <summary><span class="chev">▶</span> ข้อมูลของฉันปลอดภัยหรือไม่?</summary>
+        <div style="margin-top:10px;color:var(--muted)">ไว้ใจได้เลย เราไม่เก็บข้อมูลของผู้ใช้แม้แต่ตัวอักษรเดียว</div>
+      </details>
+      <details class="faq" data-search="แจ้งลืมยา แก้ไขเวลา บันทึกย้อนหลัง">
+        <summary><span class="chev">▶</span> ลืมทานยาไปแล้ว แก้ไขอย่างไร?</summary>
+        <div style="margin-top:10px;color:var(--muted)">ไปที่ประวัติยา เลือกรายการ แล้วปรับเวลา/บันทึกย้อนหลัง จากนั้นตรวจสอบการเตือนครั้งถัดไป</div>
+      </details>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <h2 style="color:var(--blue-900);margin:0 0 10px">ติดต่อทีมสนับสนุน</h2>
+      <div class="card">
+        <p style="margin:0 0 10px">หากยังแก้ปัญหาไม่ได้ ติดต่อเราได้ตลอดเวลา</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px">
+          <a class="btn btn-primary" href="mailto:05490@tupp.ac.th">
+  อีเมลฝ่ายสนับสนุน (05490@tupp.ac.th)
+</a>
+<a class="btn btn-ghost" href="https://lin.ee/7DC0nwV" target="_blank" rel="noopener">
+  เปิด LineOA ฝ่ายสนับสนุน
+</a>
+
+       
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> MediSafe. คู่มือการใช้งานและศูนย์ช่วยเหลือ</div>
+      <div class="tiny">โรงเรียนเตรียมอุดมศึกษาพัฒนาการสุวรรณภูมิ</div>
+    </footer>
+  </main>
+
+  <script>
+    // ปีในฟุตเตอร์
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // ค้นหา: ซ่อน/แสดง item ตามคำค้น
+    const input = document.getElementById('search');
+    const searchable = () => Array.from(document.querySelectorAll('[data-search]'));
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      searchable().forEach(el => {
+        const hay = (el.getAttribute('data-search') + ' ' + el.textContent).toLowerCase();
+        el.classList.toggle('hidden', q && !hay.includes(q));
+      });
+    });
+
+    // คัดลอกช่องทางติดต่อแบบเร็ว
+    function copyLine(){
+      const text = 'LINE: @medisafe-support | โทร: 02-000-0000';
+      navigator.clipboard.writeText(text).then(()=>{
+        alert('คัดลอกข้อมูลติดต่อแล้ว');
+      });
+    }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id = a.getAttribute('href');
+        if(id.length>1){
+          const el = document.querySelector(id);
+          if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
